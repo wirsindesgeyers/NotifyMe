@@ -1,0 +1,25 @@
+services:
+  postgres:
+    # Usamos uma versão leve (alpine) e específica
+    image: 'postgres:15-alpine'
+    container_name: notifyme-db
+    environment:
+      - 'POSTGRES_DB=notifyme_db'
+      - 'POSTGRES_USER=admin'
+      - 'POSTGRES_PASSWORD=admin'
+    ports:
+      # O formato é PORTA_DO_PC:PORTA_DO_CONTAINER
+      - '5433:5432'
+    restart: always
+
+  rabbitmq:
+    # ATENÇÃO AQUI: A tag 'management' é o que habilita o site administrativo
+    image: 'rabbitmq:3.13-management'
+    container_name: notifyme-rabbit
+    environment:
+      - 'RABBITMQ_DEFAULT_USER=admin'
+      - 'RABBITMQ_DEFAULT_PASS=admin'
+    ports:
+      - '5672:5672'   # Porta de comunicação (Java <-> Rabbit)
+      - '15672:15672' # Porta do painel visual (Navegador)
+    restart: always
