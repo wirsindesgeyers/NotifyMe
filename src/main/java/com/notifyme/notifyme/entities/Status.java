@@ -1,4 +1,4 @@
-package com.notifyme.notifyme.entities.notifications;
+package com.notifyme.notifyme.entities;
 
 public enum Status {
     PENDING,
